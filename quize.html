@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Python Quiz</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f3f4f6;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .quiz-container {
+      max-width: 700px;
+      margin: auto;
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      text-align: center;
+      color: #4f46e5;
+    }
+
+    .description {
+      text-align: center;
+      color: #6b7280;
+      margin-bottom: 20px;
+    }
+
+    .question {
+      margin-bottom: 25px;
+      padding: 15px;
+      border-left: 4px solid #4f46e5;
+      background: #f9fafb;
+      border-radius: 8px;
+    }
+
+    .question h3 {
+      margin-bottom: 10px;
+    }
+
+    label {
+      display: block;
+      padding: 6px 0;
+      cursor: pointer;
+    }
+
+    .submit-section {
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    button {
+      background-color: #4f46e5;
+      color: white;
+      padding: 10px 25px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .result-box {
+      background: #e0f2fe;
+      padding: 20px;
+      margin-top: 30px;
+      border-left: 6px solid #0284c7;
+      border-radius: 8px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="quiz-container">
+    <h1>🧠 Python Programming Quiz</h1>
+    <p class="description">Test your knowledge on variables, data types, and control flow!</p>
+
+    <form id="quiz-form">
+      <!-- Question 1 -->
+      <div class="question">
+        <h3>1. Which of the following is a valid variable name?</h3>
+        <label><input type="radio" name="q1" value="A" /> A. 2value</label>
+        <label><input type="radio" name="q1" value="B" /> B. my-var</label>
+        <label><input type="radio" name="q1" value="C" /> C. my_var</label>
+        <label><input type="radio" name="q1" value="D" /> D. class</label>
+      </div>
+
+      <!-- Question 2 -->
+      <div class="question">
+        <h3>2. What is the data type of 3.14 in Python?</h3>
+        <label><input type="radio" name="q2" value="A" /> A. int</label>
+        <label><input type="radio" name="q2" value="B" /> B. float</label>
+        <label><input type="radio" name="q2" value="C" /> C. str</label>
+        <label><input type="radio" name="q2" value="D" /> D. complex</label>
+      </div>
+
+      <!-- Question 3 -->
+      <div class="question">
+        <h3>3. Which keyword is used to start a conditional in Python?</h3>
+        <label><input type="radio" name="q3" value="A" /> A. when</label>
+        <label><input type="radio" name="q3" value="B" /> B. if</label>
+        <label><input type="radio" name="q3" value="C" /> C. switch</label>
+        <label><input type="radio" name="q3" value="D" /> D. match</label>
+      </div>
+
+      <!-- Question 4 -->
+      <div class="question">
+        <h3>4. What is the output of: <code>print(type("42"))</code>?</h3>
+        <label><input type="radio" name="q4" value="A" /> A. &lt;class 'int'&gt;</label>
+        <label><input type="radio" name="q4" value="B" /> B. &lt;class 'float'&gt;</label>
+        <label><input type="radio" name="q4" value="C" /> C. &lt;class 'str'&gt;</label>
+        <label><input type="radio" name="q4" value="D" /> D. &lt;class 'bool'&gt;</label>
+      </div>
+
+      <!-- Question 5 -->
+      <div class="question">
+        <h3>5. Which loop is guaranteed to run at least once?</h3>
+        <label><input type="radio" name="q5" value="A" /> A. for loop</label>
+        <label><input type="radio" name="q5" value="B" /> B. while loop</label>
+        <label><input type="radio" name="q5" value="C" /> C. do-while loop</label>
+        <label><input type="radio" name="q5" value="D" /> D. None of the above</label>
+      </div>
+
+      <!-- Question 6 -->
+      <div class="question">
+        <h3>6. What will this code print? <code>x = [1, 2, 3]; print(x[1])</code></h3>
+        <label><input type="radio" name="q6" value="A" /> A. 1</label>
+        <label><input type="radio" name="q6" value="B" /> B. 2</label>
+        <label><input type="radio" name="q6" value="C" /> C. 3</label>
+        <label><input type="radio" name="q6" value="D" /> D. Error</label>
+      </div>
+
+      <div class="submit-section">
+        <button type="submit">Submit</button>
+      </div>
+    </form>
+
+    <div id="result" class="result-box"></div>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const form = document.getElementById("quiz-form");
+      const resultBox = document.getElementById("result");
+
+      const correctAnswers = {
+        q1: "C",
+        q2: "B",
+        q3: "B",
+        q4: "C",
+        q5: "D",
+        q6: "B"
+      };
+
+      form.addEventListener("submit", function (event) {
+        event.preventDefault(); // Prevent page reload
+
+        let score = 0;
+        let total = Object.keys(correctAnswers).length;
+
+        for (let question in correctAnswers) {
+          const selected = document.querySelector(`input[name="${question}"]:checked`);
+          if (selected && selected.value === correctAnswers[question]) {
+            score++;
+          }
+        }
+
+        resultBox.innerHTML = `
+          <h2>Your Score: ${score} / ${total}</h2>
+          <p>${score === total ? "🎉 Excellent! All correct." : "👍 Keep practicing and try again!"}</p>
+        `;
+      });
+    });
+  </script>
+</body>
+</html>
