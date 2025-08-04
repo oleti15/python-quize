@@ -4,80 +4,17 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Python Quiz</title>
-  <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #f3f4f6;
-      margin: 0;
-      padding: 20px;
-    }
-
-    .quiz-container {
-      max-width: 700px;
-      margin: auto;
-      background: white;
-      padding: 30px;
-      border-radius: 15px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    }
-
-    h1 {
-      text-align: center;
-      color: #4f46e5;
-    }
-
-    .description {
-      text-align: center;
-      color: #6b7280;
-      margin-bottom: 20px;
-    }
-
-    .question {
-      margin-bottom: 25px;
-      padding: 15px;
-      border-left: 4px solid #4f46e5;
-      background: #f9fafb;
-      border-radius: 8px;
-    }
-
-    .question h3 {
-      margin-bottom: 10px;
-    }
-
-    label {
-      display: block;
-      padding: 6px 0;
-      cursor: pointer;
-    }
-
-    .submit-section {
-      text-align: center;
-      margin-top: 30px;
-    }
-
-    button {
-      background-color: #4f46e5;
-      color: white;
-      padding: 10px 25px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 16px;
-    }
-
-    .result-box {
-      background: #e0f2fe;
-      padding: 20px;
-      margin-top: 30px;
-      border-left: 6px solid #0284c7;
-      border-radius: 8px;
-      text-align: center;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="quiz-container">
     <h1>🧠 Python Programming Quiz</h1>
+    <div class="dark-mode-toggle">
+      <label>
+        <input type="checkbox" id="toggle-dark" />
+        🌙 Dark Mode
+      </label>
+    </div>
     <p class="description">Test your knowledge on variables, data types, and control flow!</p>
 
     <form id="quiz-form">
@@ -143,39 +80,6 @@
     <div id="result" class="result-box"></div>
   </div>
 
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const form = document.getElementById("quiz-form");
-      const resultBox = document.getElementById("result");
-
-      const correctAnswers = {
-        q1: "C",
-        q2: "B",
-        q3: "B",
-        q4: "C",
-        q5: "D",
-        q6: "B"
-      };
-
-      form.addEventListener("submit", function (event) {
-        event.preventDefault(); // Prevent page reload
-
-        let score = 0;
-        let total = Object.keys(correctAnswers).length;
-
-        for (let question in correctAnswers) {
-          const selected = document.querySelector(`input[name="${question}"]:checked`);
-          if (selected && selected.value === correctAnswers[question]) {
-            score++;
-          }
-        }
-
-        resultBox.innerHTML = `
-          <h2>Your Score: ${score} / ${total}</h2>
-          <p>${score === total ? "🎉 Excellent! All correct." : "👍 Keep practicing and try again!"}</p>
-        `;
-      });
-    });
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
